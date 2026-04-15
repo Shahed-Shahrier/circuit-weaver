@@ -3,7 +3,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 
 export function DocumentationPanel() {
   return (
-    <Card className="animate-fade-in">
+    <Card className="smooth-card border-white/60 bg-white/85 backdrop-blur-sm animate-fade-in">
       <CardHeader>
         <CardTitle className="text-lg">Documentation & Reference</CardTitle>
       </CardHeader>

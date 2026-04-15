@@ -13,7 +13,7 @@ interface CircuitInputProps {
 export function CircuitInput({ netlist, onNetlistChange, errors }: CircuitInputProps) {
   return (
     <div className="space-y-4">
-      <Card>
+      <Card className="smooth-card border-white/60 bg-white/85 backdrop-blur-sm">
         <CardHeader className="pb-3">
           <CardTitle className="text-lg">Circuit Netlist</CardTitle>
           <CardDescription>
@@ -23,7 +23,7 @@ export function CircuitInput({ netlist, onNetlistChange, errors }: CircuitInputP
         </CardHeader>
         <CardContent>
           <textarea
-            className="w-full h-48 font-mono text-sm bg-muted/50 border border-input rounded-lg p-3 resize-y focus:outline-none focus:ring-2 focus:ring-ring"
+            className="w-full h-48 font-mono text-sm bg-muted/55 border border-input rounded-lg p-3 resize-y focus:outline-none focus:ring-2 focus:ring-ring transition-shadow duration-200"
             value={netlist}
             onChange={(e) => onNetlistChange(e.target.value)}
             placeholder={`# Example:\nR1 1 2 100\nL1 2 0 0.005\nC1 1 0 0.00001\nI1 0 1 1`}
@@ -39,7 +39,7 @@ export function CircuitInput({ netlist, onNetlistChange, errors }: CircuitInputP
         </CardContent>
       </Card>
 
-      <Card>
+      <Card className="smooth-card border-white/60 bg-white/85 backdrop-blur-sm">
         <CardHeader className="pb-3">
           <CardTitle className="text-lg">Sample Circuits</CardTitle>
           <CardDescription>Click to load a pre-built circuit</CardDescription>
@@ -49,7 +49,7 @@ export function CircuitInput({ netlist, onNetlistChange, errors }: CircuitInputP
             {sampleCircuits.map((s) => (
               <button
                 key={s.name}
-                className="flex items-center gap-3 text-left p-3 rounded-lg border border-input hover:bg-muted/60 transition-colors"
+                className="flex items-center gap-3 text-left p-3 rounded-lg border border-input hover:bg-muted/60 transition-all duration-200 hover:translate-x-0.5"
                 onClick={() => onNetlistChange(s.netlist)}
               >
                 <Badge

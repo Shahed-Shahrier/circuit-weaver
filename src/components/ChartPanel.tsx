@@ -39,7 +39,7 @@ export function ChartPanel({ transientResult, acResult, analysisMode }: ChartPan
 
     return (
       <div className="space-y-4 animate-fade-in">
-        <Card>
+        <Card className="smooth-card border-white/60 bg-white/85 backdrop-blur-sm">
           <CardHeader className="pb-2">
             <CardTitle className="text-lg">Voltage vs Time</CardTitle>
           </CardHeader>
@@ -60,7 +60,7 @@ export function ChartPanel({ transientResult, acResult, analysisMode }: ChartPan
         </Card>
 
         {branchNames.length > 0 && (
-          <Card>
+          <Card className="smooth-card border-white/60 bg-white/85 backdrop-blur-sm">
             <CardHeader className="pb-2">
               <CardTitle className="text-lg">Current vs Time</CardTitle>
             </CardHeader>
@@ -100,7 +100,7 @@ export function ChartPanel({ transientResult, acResult, analysisMode }: ChartPan
 
     return (
       <div className="space-y-4 animate-fade-in">
-        <Card>
+        <Card className="smooth-card border-white/60 bg-white/85 backdrop-blur-sm">
           <CardHeader className="pb-2">
             <CardTitle className="text-lg">Bode Plot — Magnitude (Node {acResult.outputNode})</CardTitle>
           </CardHeader>
@@ -127,7 +127,7 @@ export function ChartPanel({ transientResult, acResult, analysisMode }: ChartPan
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="smooth-card border-white/60 bg-white/85 backdrop-blur-sm">
           <CardHeader className="pb-2">
             <CardTitle className="text-lg">Bode Plot — Phase (Node {acResult.outputNode})</CardTitle>
           </CardHeader>

@@ -11,7 +11,7 @@ interface ResultsPanelProps {
 export function ResultsPanel({ dcResult, error, analysisMode }: ResultsPanelProps) {
   if (error) {
     return (
-      <Card className="border-destructive/50">
+      <Card className="smooth-card border-destructive/50 bg-white/85 backdrop-blur-sm animate-fade-in">
         <CardHeader className="pb-2">
           <CardTitle className="text-lg text-destructive">Analysis Error</CardTitle>
         </CardHeader>
@@ -28,7 +28,7 @@ export function ResultsPanel({ dcResult, error, analysisMode }: ResultsPanelProp
 
   if (dcResult && analysisMode === "dc") {
     return (
-      <Card className="animate-fade-in">
+      <Card className="smooth-card border-white/60 bg-white/85 backdrop-blur-sm animate-fade-in">
         <CardHeader className="pb-2">
           <CardTitle className="text-lg">DC Analysis Results</CardTitle>
         </CardHeader>

@@ -8,7 +8,7 @@ import { parseNetlist } from "@/engine/parser";
 import { runDcAnalysis, type DcResult } from "@/engine/dcAnalysis";
 import { runTransientAnalysis, type TransientResult } from "@/engine/transientAnalysis";
 import { runAcAnalysis, type AcResult } from "@/engine/acAnalysis";
-import { Zap } from "lucide-react";
+import { Activity, Signal, Timer, Zap } from "lucide-react";
 
 const Index = () => {
   const [netlist, setNetlist] = useState("");
@@ -84,16 +84,18 @@ const Index = () => {
   }, [netlist, analysisMode, transientParams, acParams]);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-circuit-gradient">
+      <div className="circuit-orb circuit-orb-primary" aria-hidden="true" />
+      <div className="circuit-orb circuit-orb-accent" aria-hidden="true" />
       {/* Header */}
-      <header className="border-b bg-card">
-        <div className="container max-w-7xl py-5">
-          <div className="flex items-center gap-3">
-            <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-primary">
+      <header className="border-b border-white/70 bg-white/70 backdrop-blur-md sticky top-0 z-20">
+        <div className="container max-w-7xl py-4 sm:py-5">
+          <div className="flex items-center gap-3 animate-fade-in">
+            <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-primary shadow-lg shadow-primary/25">
               <Zap className="w-5 h-5 text-primary-foreground" />
             </div>
             <div>
-              <h1 className="text-2xl font-bold tracking-tight">Advanced Circuit Analyzer Tool</h1>
+              <h1 className="text-xl sm:text-2xl font-bold tracking-tight">Advanced Circuit Analyzer Tool</h1>
               <p className="text-sm text-muted-foreground">
                 DC · Transient · AC frequency response analysis for RLC circuits
               </p>
@@ -103,10 +105,36 @@ const Index = () => {
       </header>
 
       {/* Main Content */}
-      <main className="container max-w-7xl py-6">
+      <main className="container max-w-7xl py-6 sm:py-8 relative z-10">
+        <section className="mb-6 sm:mb-8 circuit-panel animate-fade-in">
+          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+            <div>
+              <p className="text-xs uppercase tracking-[0.14em] text-primary/80 font-semibold">Simulation Workspace</p>
+              <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight mt-1">Model, run, and inspect circuits in one flow</h2>
+              <p className="text-sm sm:text-base text-muted-foreground mt-2 max-w-2xl">
+                Write a netlist, choose a solver mode, and view validated numerical output with interactive charts.
+              </p>
+            </div>
+            <div className="grid grid-cols-3 gap-2 w-full md:w-auto">
+              <div className="metric-chip">
+                <Activity className="w-4 h-4 text-primary" />
+                <span>DC</span>
+              </div>
+              <div className="metric-chip">
+                <Timer className="w-4 h-4 text-accent" />
+                <span>Transient</span>
+              </div>
+              <div className="metric-chip">
+                <Signal className="w-4 h-4 text-chart-magnitude" />
+                <span>AC Sweep</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           {/* Left Column: Input & Controls */}
-          <div className="lg:col-span-4 space-y-4">
+          <div className="lg:col-span-4 space-y-4 animate-fade-in">
             <CircuitInput
               netlist={netlist}
               onNetlistChange={handleNetlistChange}
@@ -125,7 +153,7 @@ const Index = () => {
           </div>
 
           {/* Right Column: Results & Charts */}
-          <div className="lg:col-span-8 space-y-4">
+          <div className="lg:col-span-8 space-y-4 animate-fade-in">
             <ResultsPanel
               dcResult={dcResult}
               error={error}
@@ -146,7 +174,7 @@ const Index = () => {
       </main>
 
       {/* Footer */}
-      <footer className="border-t bg-card mt-8">
+      <footer className="border-t border-white/70 bg-white/70 backdrop-blur-md mt-8">
         <div className="container max-w-7xl py-4">
           <p className="text-xs text-muted-foreground text-center">
             Advanced Circuit Analyzer Tool — Educational RLC circuit analysis using Modified Nodal Analysis.

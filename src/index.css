@@ -69,3 +69,102 @@
     font-family: 'JetBrains Mono', monospace;
   }
 }
+
+@layer components {
+  .bg-circuit-gradient {
+    background:
+      radial-gradient(circle at 10% 5%, hsl(215 80% 48% / 0.12), transparent 38%),
+      radial-gradient(circle at 94% 18%, hsl(160 60% 42% / 0.11), transparent 34%),
+      linear-gradient(180deg, hsl(var(--background)) 0%, hsl(220 22% 95%) 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .circuit-orb {
+    position: fixed;
+    border-radius: 9999px;
+    filter: blur(56px);
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.35;
+  }
+
+  .circuit-orb-primary {
+    width: 14rem;
+    height: 14rem;
+    left: -3rem;
+    top: 8rem;
+    background: hsl(var(--primary));
+    animation: drift-soft 12s ease-in-out infinite;
+  }
+
+  .circuit-orb-accent {
+    width: 17rem;
+    height: 17rem;
+    right: -4rem;
+    top: 18rem;
+    background: hsl(var(--accent));
+    animation: drift-soft 14s ease-in-out infinite reverse;
+  }
+
+  .circuit-panel {
+    border: 1px solid hsl(var(--border) / 0.75);
+    border-radius: 1rem;
+    background: hsl(0 0% 100% / 0.82);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 18px 40px -28px hsl(220 30% 10% / 0.4);
+    padding: 1.1rem;
+  }
+
+  .metric-chip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    padding: 0.5rem 0.7rem;
+    border-radius: 0.75rem;
+    border: 1px solid hsl(var(--border));
+    background: hsl(0 0% 100% / 0.8);
+    color: hsl(var(--foreground));
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    transition: transform 220ms ease, box-shadow 220ms ease;
+  }
+
+  .metric-chip:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px -16px hsl(220 30% 10% / 0.7);
+  }
+}
+
+@layer utilities {
+  .smooth-card {
+    transition: transform 240ms ease, box-shadow 240ms ease, border-color 240ms ease;
+  }
+
+  .smooth-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 28px -20px hsl(220 30% 10% / 0.55);
+  }
+}
+
+@keyframes drift-soft {
+  0%,
+  100% {
+    transform: translateY(0) translateX(0);
+  }
+  50% {
+    transform: translateY(-14px) translateX(6px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .circuit-orb-primary,
+  .circuit-orb-accent,
+  .smooth-card,
+  .metric-chip {
+    animation: none !important;
+    transition: none !important;
+  }
+}

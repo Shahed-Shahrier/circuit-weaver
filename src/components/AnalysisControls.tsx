@@ -35,7 +35,7 @@ export function AnalysisControls({
   acParams, onAcParamsChange, onRun, isRunning,
 }: AnalysisControlsProps) {
   return (
-    <Card>
+    <Card className="smooth-card border-white/60 bg-white/85 backdrop-blur-sm">
       <CardHeader className="pb-3">
         <CardTitle className="text-lg">Analysis Mode</CardTitle>
       </CardHeader>
@@ -102,7 +102,7 @@ export function AnalysisControls({
           </div>
         )}
 
-        <Button className="w-full" size="lg" onClick={onRun} disabled={isRunning}>
+        <Button className="w-full transition-transform duration-200 hover:-translate-y-0.5" size="lg" onClick={onRun} disabled={isRunning}>
           {isRunning ? "Analyzing…" : `Run ${mode.toUpperCase()} Analysis`}
         </Button>
       </CardContent>
