@@ -93,6 +93,18 @@ The output is placed in `dist/`.
 npm run preview
 ```
 
+### GitHub Pages deployment
+
+This app can be published on GitHub Pages as a static Vite build.
+
+1. The app is built for the `/circuit-weaver/` subpath.
+2. GitHub Actions publishes `dist/` to the `gh-pages` branch.
+3. GitHub Pages should be configured to serve from the `gh-pages` branch root.
+
+Live URL once enabled:
+
+`https://shahed-shahrier.github.io/circuit-weaver/`
+
 ---
 
 ## Project Structure
