@@ -39,44 +39,48 @@ export function ChartPanel({ transientResult, acResult, analysisMode }: ChartPan
 
     return (
       <div className="space-y-4 animate-fade-in">
-        <Card className="smooth-card border-white/60 bg-white/85 backdrop-blur-sm">
+        <Card className="smooth-card border-white/60 bg-white/90 backdrop-blur-sm">
           <CardHeader className="pb-2">
             <CardTitle className="text-lg">Voltage vs Time</CardTitle>
           </CardHeader>
           <CardContent>
-            <ResponsiveContainer width="100%" height={300}>
-              <LineChart data={voltageData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="hsl(220, 15%, 88%)" />
-                <XAxis dataKey="time" label={{ value: "Time (ms)", position: "insideBottom", offset: -5 }} tick={{ fontSize: 11 }} />
-                <YAxis label={{ value: "Voltage (V)", angle: -90, position: "insideLeft" }} tick={{ fontSize: 11 }} />
-                <Tooltip contentStyle={{ fontSize: 12, fontFamily: "'JetBrains Mono'" }} />
-                <Legend />
-                {nonGroundNodes.map((nv, i) => (
-                  <Line key={nv.node} type="monotone" dataKey={`V(${nv.node})`} stroke={colors[i % colors.length]} dot={false} strokeWidth={2} />
-                ))}
-              </LineChart>
-            </ResponsiveContainer>
+            <div className="chart-shell">
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart data={voltageData}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="hsl(220, 15%, 88%)" />
+                  <XAxis dataKey="time" label={{ value: "Time (ms)", position: "insideBottom", offset: -5 }} tick={{ fontSize: 11 }} />
+                  <YAxis label={{ value: "Voltage (V)", angle: -90, position: "insideLeft" }} tick={{ fontSize: 11 }} />
+                  <Tooltip contentStyle={{ fontSize: 12, fontFamily: "'JetBrains Mono'" }} />
+                  <Legend />
+                  {nonGroundNodes.map((nv, i) => (
+                    <Line key={nv.node} type="monotone" dataKey={`V(${nv.node})`} stroke={colors[i % colors.length]} dot={false} strokeWidth={2} />
+                  ))}
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
           </CardContent>
         </Card>
 
         {branchNames.length > 0 && (
-          <Card className="smooth-card border-white/60 bg-white/85 backdrop-blur-sm">
+          <Card className="smooth-card border-white/60 bg-white/90 backdrop-blur-sm">
             <CardHeader className="pb-2">
               <CardTitle className="text-lg">Current vs Time</CardTitle>
             </CardHeader>
             <CardContent>
-              <ResponsiveContainer width="100%" height={300}>
-                <LineChart data={currentData}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="hsl(220, 15%, 88%)" />
-                  <XAxis dataKey="time" label={{ value: "Time (ms)", position: "insideBottom", offset: -5 }} tick={{ fontSize: 11 }} />
-                  <YAxis label={{ value: "Current (mA)", angle: -90, position: "insideLeft" }} tick={{ fontSize: 11 }} />
-                  <Tooltip contentStyle={{ fontSize: 12, fontFamily: "'JetBrains Mono'" }} />
-                  <Legend />
-                  {branchNames.map((name, i) => (
-                    <Line key={name} type="monotone" dataKey={name} stroke={colors[(i + 1) % colors.length]} dot={false} strokeWidth={2} />
-                  ))}
-                </LineChart>
-              </ResponsiveContainer>
+              <div className="chart-shell">
+                <ResponsiveContainer width="100%" height="100%">
+                  <LineChart data={currentData}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="hsl(220, 15%, 88%)" />
+                    <XAxis dataKey="time" label={{ value: "Time (ms)", position: "insideBottom", offset: -5 }} tick={{ fontSize: 11 }} />
+                    <YAxis label={{ value: "Current (mA)", angle: -90, position: "insideLeft" }} tick={{ fontSize: 11 }} />
+                    <Tooltip contentStyle={{ fontSize: 12, fontFamily: "'JetBrains Mono'" }} />
+                    <Legend />
+                    {branchNames.map((name, i) => (
+                      <Line key={name} type="monotone" dataKey={name} stroke={colors[(i + 1) % colors.length]} dot={false} strokeWidth={2} />
+                    ))}
+                  </LineChart>
+                </ResponsiveContainer>
+              </div>
             </CardContent>
           </Card>
         )}
@@ -100,57 +104,61 @@ export function ChartPanel({ transientResult, acResult, analysisMode }: ChartPan
 
     return (
       <div className="space-y-4 animate-fade-in">
-        <Card className="smooth-card border-white/60 bg-white/85 backdrop-blur-sm">
+        <Card className="smooth-card border-white/60 bg-white/90 backdrop-blur-sm">
           <CardHeader className="pb-2">
             <CardTitle className="text-lg">Bode Plot — Magnitude (Node {acResult.outputNode})</CardTitle>
           </CardHeader>
           <CardContent>
-            <ResponsiveContainer width="100%" height={300}>
-              <LineChart data={magData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="hsl(220, 15%, 88%)" />
-                <XAxis
-                  dataKey="freq"
-                  scale="log"
-                  domain={["dataMin", "dataMax"]}
-                  type="number"
-                  label={{ value: "Frequency (Hz)", position: "insideBottom", offset: -5 }}
-                  tick={{ fontSize: 11 }}
-                  tickFormatter={(v: number) => v >= 1000 ? `${(v/1000).toFixed(0)}k` : v.toFixed(0)}
-                />
-                <YAxis label={{ value: "Magnitude (dB)", angle: -90, position: "insideLeft" }} tick={{ fontSize: 11 }} />
-                <Tooltip contentStyle={{ fontSize: 12, fontFamily: "'JetBrains Mono'" }}
-                  formatter={(v: number) => `${v.toFixed(2)} dB`}
-                  labelFormatter={(v: number) => `${v.toFixed(1)} Hz`} />
-                <Line type="monotone" dataKey="magnitude" stroke="hsl(262, 60%, 55%)" dot={false} strokeWidth={2} />
-              </LineChart>
-            </ResponsiveContainer>
+            <div className="chart-shell">
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart data={magData}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="hsl(220, 15%, 88%)" />
+                  <XAxis
+                    dataKey="freq"
+                    scale="log"
+                    domain={["dataMin", "dataMax"]}
+                    type="number"
+                    label={{ value: "Frequency (Hz)", position: "insideBottom", offset: -5 }}
+                    tick={{ fontSize: 11 }}
+                    tickFormatter={(v: number) => v >= 1000 ? `${(v/1000).toFixed(0)}k` : v.toFixed(0)}
+                  />
+                  <YAxis label={{ value: "Magnitude (dB)", angle: -90, position: "insideLeft" }} tick={{ fontSize: 11 }} />
+                  <Tooltip contentStyle={{ fontSize: 12, fontFamily: "'JetBrains Mono'" }}
+                    formatter={(v: number) => `${v.toFixed(2)} dB`}
+                    labelFormatter={(v: number) => `${v.toFixed(1)} Hz`} />
+                  <Line type="monotone" dataKey="magnitude" stroke="hsl(262, 60%, 55%)" dot={false} strokeWidth={2} />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
           </CardContent>
         </Card>
 
-        <Card className="smooth-card border-white/60 bg-white/85 backdrop-blur-sm">
+        <Card className="smooth-card border-white/60 bg-white/90 backdrop-blur-sm">
           <CardHeader className="pb-2">
             <CardTitle className="text-lg">Bode Plot — Phase (Node {acResult.outputNode})</CardTitle>
           </CardHeader>
           <CardContent>
-            <ResponsiveContainer width="100%" height={300}>
-              <LineChart data={phaseData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="hsl(220, 15%, 88%)" />
-                <XAxis
-                  dataKey="freq"
-                  scale="log"
-                  domain={["dataMin", "dataMax"]}
-                  type="number"
-                  label={{ value: "Frequency (Hz)", position: "insideBottom", offset: -5 }}
-                  tick={{ fontSize: 11 }}
-                  tickFormatter={(v: number) => v >= 1000 ? `${(v/1000).toFixed(0)}k` : v.toFixed(0)}
-                />
-                <YAxis label={{ value: "Phase (°)", angle: -90, position: "insideLeft" }} tick={{ fontSize: 11 }} />
-                <Tooltip contentStyle={{ fontSize: 12, fontFamily: "'JetBrains Mono'" }}
-                  formatter={(v: number) => `${v.toFixed(2)}°`}
-                  labelFormatter={(v: number) => `${v.toFixed(1)} Hz`} />
-                <Line type="monotone" dataKey="phase" stroke="hsl(25, 90%, 55%)" dot={false} strokeWidth={2} />
-              </LineChart>
-            </ResponsiveContainer>
+            <div className="chart-shell">
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart data={phaseData}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="hsl(220, 15%, 88%)" />
+                  <XAxis
+                    dataKey="freq"
+                    scale="log"
+                    domain={["dataMin", "dataMax"]}
+                    type="number"
+                    label={{ value: "Frequency (Hz)", position: "insideBottom", offset: -5 }}
+                    tick={{ fontSize: 11 }}
+                    tickFormatter={(v: number) => v >= 1000 ? `${(v/1000).toFixed(0)}k` : v.toFixed(0)}
+                  />
+                  <YAxis label={{ value: "Phase (°)", angle: -90, position: "insideLeft" }} tick={{ fontSize: 11 }} />
+                  <Tooltip contentStyle={{ fontSize: 12, fontFamily: "'JetBrains Mono'" }}
+                    formatter={(v: number) => `${v.toFixed(2)}°`}
+                    labelFormatter={(v: number) => `${v.toFixed(1)} Hz`} />
+                  <Line type="monotone" dataKey="phase" stroke="hsl(25, 90%, 55%)" dot={false} strokeWidth={2} />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
           </CardContent>
         </Card>
       </div>

@@ -1,7 +1,5 @@
-import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { sampleCircuits, type SampleCircuit } from "@/engine/samples";
+import { sampleCircuits } from "@/engine/samples";
 import { Badge } from "@/components/ui/badge";
 
 interface CircuitInputProps {
@@ -13,7 +11,7 @@ interface CircuitInputProps {
 export function CircuitInput({ netlist, onNetlistChange, errors }: CircuitInputProps) {
   return (
     <div className="space-y-4">
-      <Card className="smooth-card border-white/60 bg-white/85 backdrop-blur-sm">
+      <Card className="smooth-card border-white/60 bg-white/90 backdrop-blur-sm">
         <CardHeader className="pb-3">
           <CardTitle className="text-lg">Circuit Netlist</CardTitle>
           <CardDescription>
@@ -23,7 +21,7 @@ export function CircuitInput({ netlist, onNetlistChange, errors }: CircuitInputP
         </CardHeader>
         <CardContent>
           <textarea
-            className="w-full h-48 font-mono text-sm bg-muted/55 border border-input rounded-lg p-3 resize-y focus:outline-none focus:ring-2 focus:ring-ring transition-shadow duration-200"
+            className="w-full min-h-[220px] sm:min-h-[250px] font-mono text-sm bg-muted/55 border border-input rounded-lg p-3 resize-y focus:outline-none focus:ring-2 focus:ring-ring transition-shadow duration-200"
             value={netlist}
             onChange={(e) => onNetlistChange(e.target.value)}
             placeholder={`# Example:\nR1 1 2 100\nL1 2 0 0.005\nC1 1 0 0.00001\nI1 0 1 1`}
@@ -39,7 +37,7 @@ export function CircuitInput({ netlist, onNetlistChange, errors }: CircuitInputP
         </CardContent>
       </Card>
 
-      <Card className="smooth-card border-white/60 bg-white/85 backdrop-blur-sm">
+      <Card className="smooth-card border-white/60 bg-white/90 backdrop-blur-sm">
         <CardHeader className="pb-3">
           <CardTitle className="text-lg">Sample Circuits</CardTitle>
           <CardDescription>Click to load a pre-built circuit</CardDescription>

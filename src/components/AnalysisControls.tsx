@@ -35,7 +35,7 @@ export function AnalysisControls({
   acParams, onAcParamsChange, onRun, isRunning,
 }: AnalysisControlsProps) {
   return (
-    <Card className="smooth-card border-white/60 bg-white/85 backdrop-blur-sm">
+    <Card className="smooth-card border-white/60 bg-white/90 backdrop-blur-sm">
       <CardHeader className="pb-3">
         <CardTitle className="text-lg">Analysis Mode</CardTitle>
       </CardHeader>
@@ -49,7 +49,7 @@ export function AnalysisControls({
         </Tabs>
 
         {mode === "transient" && (
-          <div className="grid grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <div>
               <Label className="text-xs">Start (s)</Label>
               <Input type="number" value={transientParams.tStart} step={0.0001}
@@ -70,7 +70,7 @@ export function AnalysisControls({
 
         {mode === "ac" && (
           <div className="space-y-3">
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
                 <Label className="text-xs">Start Freq (Hz)</Label>
                 <Input type="number" value={acParams.startFreq}
@@ -82,7 +82,7 @@ export function AnalysisControls({
                   onChange={e => onAcParamsChange({ ...acParams, endFreq: parseFloat(e.target.value) || 100000 })} />
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
                 <Label className="text-xs">Points</Label>
                 <Input type="number" value={acParams.numPoints}
